@@ -18,7 +18,7 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "publish": "np --contents=dist"
+    "publish": "np"
   },
   "peerDependencies": {},
   "husky": {
