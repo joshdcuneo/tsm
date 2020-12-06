@@ -18,7 +18,7 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "publish": "np"
+    "publish": "np --contents=dist"
   },
   "peerDependencies": {},
   "husky": {
@@ -40,14 +40,17 @@
   "name": "@joshdcuneo/tsm",
   "author": "Josh Cuneo",
   "module": "dist/tsm.esm.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "size-limit": [
     {
       "path": "dist/tsm.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "1 KB"
     },
     {
       "path": "dist/tsm.esm.js",
-      "limit": "10 KB"
+      "limit": "1 KB"
     }
   ],
   "devDependencies": {
