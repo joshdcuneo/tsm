@@ -12,7 +12,6 @@ describe('counter machine', () => {
       state,
       transition,
       reducer,
-      context,
       guard,
       immediate,
       action,
@@ -50,12 +49,11 @@ describe('counter machine', () => {
     const counterServiceConfig = machine(
       state('idle', inc),
       state('counting', maxedOut, inc, dec, reset),
-      state('maxedOut', restart),
-      context(0)
+      state('maxedOut', restart)
     );
 
     const subscriber = jest.fn() as SubscriberFn<State, Event, Context>;
-    const counterService = interpret(counterServiceConfig);
+    const counterService = interpret(counterServiceConfig, 0);
 
     counterService.subscribe(subscriber);
 

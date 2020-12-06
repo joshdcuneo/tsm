@@ -1,6 +1,7 @@
 import invariant from 'tiny-invariant';
 import {
   actionProto,
+  components,
   contextProto,
   invokeProto,
   machineProto,
@@ -18,8 +19,19 @@ import {
 import { immutable, isType } from './utility';
 
 export const interpret = <S, E extends MachineEvent, C extends unknown>(
-  machine: Machine<S, E, C>
+  machineConfig: Machine<S, E, C>,
+  initialContext?: C
 ): Service<S, E, C> => {
+  let machine: Machine<S, E, C>;
+  if (initialContext !== undefined) {
+    const { context } = components<S, E, C>();
+    machine = immutable(machineProto, {
+      ...machineConfig,
+      context: context(initialContext),
+    });
+  } else {
+    machine = machineConfig;
+  }
   const service: Service<S, E, C> = {
     machine,
     subscribers: [],
